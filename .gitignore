@@ -1,0 +1,33 @@
+# Dependências do Node (nunca sobem para o Git)
+/node_modules
+/.pnpm-store
+
+# Arquivos de Build do Next.js
+/.next/
+/out/
+
+# Produção
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Variáveis de Ambiente e Chaves de API (Segurança)
+.env
+.env*.local
+
+# Configurações de Editores de Código / IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Arquivos de Sistema Operacional (especialmente no macOS)
+.DS_Store
+*.pem
