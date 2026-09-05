@@ -22,11 +22,11 @@ export default function SolvtekLandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-hidden">
-      
+
       {/* Botão Flutuante do WhatsApp */}
-      <a 
-        href={whatsappUrl} 
-        target="_blank" 
+      <a
+        href={whatsappUrl}
+        target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300 flex items-center justify-center"
       >
@@ -35,7 +35,7 @@ export default function SolvtekLandingPage() {
 
       {/* Hero Section (Parallax Sutil) */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-blue-50 to-slate-50">
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0 opacity-30"
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -46,7 +46,7 @@ export default function SolvtekLandingPage() {
           <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="relative z-10 max-w-4xl mx-auto text-center"
           initial="hidden" animate="visible" variants={fadeInUp}
         >
@@ -70,7 +70,7 @@ export default function SolvtekLandingPage() {
 
       {/* Dores / Problemas */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
         >
@@ -97,7 +97,7 @@ export default function SolvtekLandingPage() {
 
       {/* Soluções */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
         >
@@ -128,7 +128,7 @@ export default function SolvtekLandingPage() {
 
       {/* Showcase / Projeto Destaque */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-100 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
         >
@@ -136,7 +136,7 @@ export default function SolvtekLandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Veja na prática nossa entrega</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">Navegue por nossas demonstrações de sistemas e layouts desenvolvidos para diferentes segmentos.</p>
           </div>
-          
+
           <div className="relative mx-auto max-w-5xl rounded-xl shadow-2xl border border-slate-200 overflow-hidden bg-white">
             {/* PLACEHOLDER PARA AS SCREENSHOTS DO PROJETO DE VOCÊS */}
             <div className="w-full h-8 bg-slate-200 flex items-center px-4 gap-2">
@@ -145,8 +145,8 @@ export default function SolvtekLandingPage() {
               <div className="w-3 h-3 rounded-full bg-green-400"></div>
             </div>
             <div className="aspect-[16/9] w-full bg-slate-300 flex items-center justify-center relative">
-               {/* Quando tiver a imagem, troque a tag abaixo por um componente <Image /> do Next.js */}
-               <span className="text-slate-500 font-medium">Screenshot do Projeto / Mockup Aqui</span>
+              {/* Quando tiver a imagem, troque a tag abaixo por um componente <Image /> do Next.js */}
+              <span className="text-slate-500 font-medium">Screenshot do Projeto / Mockup Aqui</span>
             </div>
           </div>
         </motion.div>
@@ -154,7 +154,7 @@ export default function SolvtekLandingPage() {
 
       {/* Quem Somos / Equipe */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
         >
@@ -164,34 +164,34 @@ export default function SolvtekLandingPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 text-center">
-            {/* Membro 1: Bruno */}
+            {/* Membro 1: Bruno Rocha */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center">
-              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden">
-                {/* <img src="/foto-bruno.jpg" alt="Bruno Rocha" className="w-full h-full object-cover" /> */}
+              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden flex items-center justify-center text-4xl">
+                👨‍💻
               </div>
               <h3 className="text-xl font-bold">Bruno Rocha</h3>
-              <p className="text-blue-600 font-medium mb-3">Frontend & Integrações</p>
-              <p className="text-slate-500 text-sm px-4">Estudante de Ciência da Computação (Chapecó) e desenvolvedor open-source focado em performance e interfaces modernas.</p>
+              <p className="text-blue-600 font-medium mb-3">Frontend & Gambiarras High Tech</p>
+              <p className="text-slate-500 text-sm px-4">Manjador profissional de código. Se funciona de primeira, desconfia que tem algo muito errado.</p>
             </motion.div>
 
-            {/* Membro 2: Placeholder */}
+            {/* Membro 2: Eduardo Mariano */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center">
-              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden">
-                {/* Foto */}
+              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden flex items-center justify-center text-4xl">
+                🐸
               </div>
-              <h3 className="text-xl font-bold">Nome do Sócio</h3>
-              <p className="text-blue-600 font-medium mb-3">Backend & Estrutura</p>
-              <p className="text-slate-500 text-sm px-4">Especialista em criar a lógica dos sistemas para que tudo funcione perfeitamente de forma invisível.</p>
+              <h3 className="text-xl font-bold">Eduardo Mariano</h3>
+              <p className="text-blue-600 font-medium mb-3">Backend & Sapo Cego</p>
+              <p className="text-slate-500 text-sm px-4">Olha pro código do banco de dados igual um sapo cego olhando pro sol, mas no fim sempre faz a mágica acontecer.</p>
             </motion.div>
 
-            {/* Membro 3: Placeholder */}
+            {/* Membro 3: Ryan Rios */}
             <motion.div variants={fadeInUp} className="flex flex-col items-center">
-              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden">
-                {/* Foto */}
+              <div className="w-32 h-32 rounded-full bg-slate-200 mb-4 overflow-hidden flex items-center justify-center text-4xl">
+                ☕
               </div>
-              <h3 className="text-xl font-bold">Nome do Sócio</h3>
-              <p className="text-blue-600 font-medium mb-3">Design & UX</p>
-              <p className="text-slate-500 text-sm px-4">Focado na experiência do usuário para garantir que o seu cliente compre com a maior facilidade possível.</p>
+              <h3 className="text-xl font-bold">Ryan Rios</h3>
+              <p className="text-blue-600 font-medium mb-3">Design & Sommelier de Café</p>
+              <p className="text-slate-500 text-sm px-4">Especialista em mover pixel 1 milímetro para a esquerda e reclamar do café da faculdade enquanto cria layouts incríveis.</p>
             </motion.div>
           </div>
         </motion.div>
@@ -199,7 +199,7 @@ export default function SolvtekLandingPage() {
 
       {/* FAQ */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <motion.div 
+        <motion.div
           className="max-w-3xl mx-auto"
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
         >
