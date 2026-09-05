@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soluct. — tecnologia para o comércio de Chapecó</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #060911;
+    --bg-elevated: #0d1320;
+    --bg-elevated-2: #111a2b;
+    --glow-cyan: #3aa9e0;
+    --glow-cyan-soft: rgba(58,169,224,0.30);
+    --gold: #e3a94a;
+    --gold-soft: rgba(227,169,74,0.16);
+    --text: #f3efe6;
+    --text-muted: #9aa4b5;
+    --text-faint: #6b7484;
+    --border: rgba(255,255,255,0.09);
+    --border-strong: rgba(255,255,255,0.16);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --header-h: 84px;
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  p{ margin:0; }
+  a{ color: inherit; text-decoration: none; }
+  ul{ list-style:none; margin:0; padding:0; }
+  button{ font-family: inherit; cursor:pointer; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: 2px solid var(--glow-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section{ scroll-margin-top: var(--header-h); position: relative; }
+
+  /* ---------- grain overlay (page-wide, subtle) ---------- */
+  .grain{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 50;
+    height: var(--header-h);
+    display:flex;
+    align-items:center;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+  }
+  .site-header.scrolled{
+    background-color: rgba(6,9,17,0.75);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .site-header .wrap{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight:500;
+  }
+  .logo span{ color: var(--gold); }
+
+  nav.primary-nav ul{
+    display:flex;
+    gap: 36px;
+  }
+  nav.primary-nav a{
+    font-size: 0.94rem;
+    color: var(--text-muted);
+    transition: color .2s ease;
+  }
+  nav.primary-nav a:hover{ color: var(--text); }
+
+  .header-actions{ display:flex; align-items:center; gap:20px; }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    transition: transform .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease;
+  }
+  .btn-primary{
+    background: var(--gold);
+    color: #1a1204;
+  }
+  .btn-primary:hover{ background:#eeb85e; transform: translateY(-1px); }
+
+  .btn-ghost{
+    background: transparent;
+    border-color: var(--border-strong);
+    color: var(--text);
+    padding: 12px 24px;
+  }
+  .btn-ghost:hover{ border-color: var(--glow-cyan); }
+
+  .btn-small{ padding: 9px 20px; font-size: 0.86rem; }
+
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    width: 34px;
+    height: 26px;
+    position:relative;
+  }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:'';
+    position:absolute;
+    left:0; right:0;
+    height:1.5px;
+    background: var(--text);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .nav-toggle span{ top:12px; }
+  .nav-toggle span::before{ top:-9px; }
+  .nav-toggle span::after{ top:9px; }
+  .nav-toggle.open span{ background: transparent; }
+  .nav-toggle.open span::before{ transform: translateY(9px) rotate(45deg); }
+  .nav-toggle.open span::after{ transform: translateY(-9px) rotate(-45deg); }
+
+  .mobile-menu{
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    background: rgba(6,9,17,0.98);
+    z-index: 45;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 30px;
+    transform: translateY(-12px);
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .mobile-menu.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  .mobile-menu a{ font-family:'Fraunces', serif; font-size: 1.6rem; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    padding-top: var(--header-h);
+    overflow:hidden;
+  }
+  .hero .glow{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(90px);
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero .glow-1{
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, var(--glow-cyan-soft), transparent 70%);
+    top: -220px; right: -160px;
+  }
+  .hero .glow-2{
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(227,169,74,0.14), transparent 70%);
+    bottom: -180px; left: -140px;
+  }
+  .hero .wrap{ position: relative; z-index:2; }
+  .hero-content{ max-width: 700px; }
+
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 400;
+  }
+  .hero h1 em{ font-style: italic; font-weight:400; }
+
+  .hero .lede{
+    margin-top: 26px;
+    max-width: 54ch;
+    color: var(--text-muted);
+    font-size: 1.08rem;
+  }
+
+  .hero .cta-row{
+    margin-top: 40px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .hero .fine-print{
+    margin-top: 28px;
+    font-size: 0.86rem;
+    color: var(--text-faint);
+  }
+
+  .hero-content > *{
+    opacity:0;
+    transform: translateY(16px);
+    animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards;
+  }
+  .hero-content > *:nth-child(1){ animation-delay: .05s; }
+  .hero-content > *:nth-child(2){ animation-delay: .18s; }
+  .hero-content > *:nth-child(3){ animation-delay: .31s; }
+  .hero-content > *:nth-child(4){ animation-delay: .44s; }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-content > *{ animation: none; opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- about / quem somos ---------- */
+  .about{ padding: 140px 0; border-top: 1px solid var(--border); }
+  .about .grid{
+    display:grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 72px;
+    align-items:start;
+  }
+  .section-heading{
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    max-width: 20ch;
+  }
+  .about .body-text{
+    margin-top: 28px;
+    color: var(--text-muted);
+    max-width: 62ch;
+    font-size: 1.02rem;
+  }
+
+  .pull-card{
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--gold);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    margin-top: 8px;
+  }
+  .pull-card p{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .pull-card .tag{
+    display:block;
+    margin-top:20px;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ---------- solutions ---------- */
+  .solutions{ padding: 140px 0; border-top: 1px solid var(--border); background: var(--bg-elevated); }
+  .solutions .section-heading{ max-width: 26ch; margin-bottom: 64px; }
+
+  .solution-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    transition: background-color .25s ease;
+  }
+  .solution-row:last-child{ border-bottom: 1px solid var(--border); }
+  .solution-row:hover{ background-color: rgba(255,255,255,0.02); }
+
+  .solution-row h3{
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .solution-row .short{
+    margin-top: 14px;
+    color: var(--text-muted);
+    max-width: 40ch;
+  }
+  .solution-row .detailed{
+    color: var(--text-muted);
+    max-width: 48ch;
+    padding-top: 4px;
+    border-left: 1px solid var(--border);
+    padding-left: 32px;
+  }
+
+  /* ---------- projects ---------- */
+  .projects{ padding: 140px 0; border-top: 1px solid var(--border); }
+  .projects-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap: 32px;
+    margin-bottom: 56px;
+    flex-wrap:wrap;
+  }
+  .projects-head .note{
+    color: var(--text-faint);
+    font-size: 0.92rem;
+    max-width: 34ch;
+  }
+
+  .project-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .project-card{
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow:hidden;
+    background: var(--bg-elevated);
+  }
+  .project-thumb{
+    height: 160px;
+    position:relative;
+  }
+  .project-thumb.t1{ background: linear-gradient(135deg, #1c2b3d, #3aa9e0 140%); }
+  .project-thumb.t2{ background: linear-gradient(135deg, #3a2413, #e3a94a 150%); }
+  .project-thumb.t3{ background: linear-gradient(135deg, #17202f, #4b6a8f 130%); }
+  .project-thumb::after{
+    content:'';
+    position:absolute; inset:0;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:0.12;
+    mix-blend-mode: overlay;
+  }
+  .project-body{ padding: 22px 24px 26px; }
+  .project-tag{
+    font-size: 0.78rem;
+    color: var(--gold);
+  }
+  .project-body h3{
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight:500;
+  }
+  .project-body p{
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ---------- contact / footer ---------- */
+  .contact-footer{
+    padding: 130px 0 60px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated-2);
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-footer .glow{
+    position:absolute;
+    width: 560px; height: 560px;
+    border-radius:50%;
+    background: radial-gradient(circle, var(--glow-cyan-soft), transparent 70%);
+    filter: blur(100px);
+    top: -260px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events:none;
+  }
+  .contact-footer .wrap{ position:relative; z-index:1; }
+
+  .contact-head{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .contact-head h2{ font-size: clamp(1.9rem, 4vw, 2.6rem); }
+  .contact-head .sub{
+    margin-top: 18px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+  .contact-head .btn{ margin-top: 36px; }
+
+  .contact-grid{
+    margin-top: 88px;
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items:start;
+    border-top: 1px solid var(--border);
+    padding-top: 64px;
+  }
+  .contact-info h3{ font-size: 1.4rem; font-weight:500; }
+  .contact-info p{ margin-top: 16px; color: var(--text-muted); max-width: 36ch; }
+  .contact-info .detail{
+    margin-top: 28px;
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+    font-size: 0.94rem;
+  }
+  .contact-info .detail span:first-child{ color: var(--text-faint); font-size: 0.82rem; }
+
+  form.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap: 20px;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+  }
+  .field label{ font-size: 0.86rem; color: var(--text-muted); }
+  .field input, .field textarea{
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.96rem;
+    resize: vertical;
+  }
+  .field input::placeholder, .field textarea::placeholder{ color: var(--text-faint); }
+  .field input:focus, .field textarea:focus{ border-color: var(--glow-cyan); outline:none; }
+
+  .form-note{ font-size: 0.82rem; color: var(--text-faint); }
+
+  .footer-bottom{
+    margin-top: 90px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap: 12px;
+    color: var(--text-faint);
+    font-size: 0.84rem;
+  }
+  .footer-bottom .logo{ font-size: 1.05rem; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    nav.primary-nav{ display:none; }
+    .header-actions .btn-ghost{ display:none; }
+    .nav-toggle{ display:block; }
+
+    .about .grid{ grid-template-columns: 1fr; gap: 40px; }
+    .solution-row{ grid-template-columns: 1fr; gap:16px; }
+    .solution-row .detailed{ border-left:none; padding-left:0; }
+    .project-grid{ grid-template-columns: 1fr; }
+    .contact-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 20px; }
+    .about, .solutions, .projects{ padding: 90px 0; }
+    .contact-footer{ padding: 90px 0 40px; }
+    .hero .cta-row{ flex-direction:column; align-items:stretch; }
+    .hero .cta-row .btn{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a href="#" class="logo">Soluct<span>.</span></a>
+
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="#quem-somos">Quem somos?</a></li>
+        <li><a href="#solucoes">O que solucionamos</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#" class="btn btn-ghost btn-small" id="headerWhatsapp">Falar no WhatsApp</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#quem-somos">Quem somos?</a>
+  <a href="#solucoes">O que solucionamos</a>
+  <a href="#projetos">Projetos</a>
+  <a href="#contato">Contato</a>
+</div>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <h1>O comércio de Chapecó<br>merece uma <em>vitrine digital</em><br>à altura.</h1>
+        <p class="lede">Criamos sites, catálogos e sistemas de agendamento pensados para pequenos e médios negócios da região — com tecnologia moderna e um atendimento que não larga sua mão.</p>
+        <div class="cta-row">
+          <a href="#" class="btn btn-primary whatsapp-cta">Iniciar conversa no WhatsApp</a>
+          <a href="#solucoes" class="btn btn-ghost">Ver soluções</a>
+        </div>
+        <p class="fine-print">Sites, catálogos e agendamento — feitos sob medida para o seu negócio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="quem-somos">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <h2 class="section-heading">Tecnologia acessível para impulsionar o comércio regional</h2>
+          <p class="body-text">Somos uma equipe de desenvolvedores focados em criar soluções digitais simples e eficientes para o comércio de Chapecó e região. Combinamos tecnologia moderna com um atendimento próximo, acompanhando cada etapa do projeto para que seu negócio tenha resultados reais.</p>
+        </div>
+        <div class="pull-card">
+          <p>"Desenvolvedores locais comprometidos em transformar a presença digital de pequenas e médias empresas com proximidade e agilidade."</p>
+          <span class="tag">Nossa forma de trabalhar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solutions" id="solucoes">
+    <div class="wrap">
+      <h2 class="section-heading">Soluções práticas para o seu negócio crescer na internet</h2>
+
+      <div class="solution-row">
+        <div>
+          <h3>Sites Institucionais e Vendas</h3>
+          <p class="short">Páginas modernas e otimizadas para celulares, prontas para converter visitantes em clientes.</p>
+        </div>
+        <p class="detailed">Desenvolvemos sites rápidos, bonitos e seguros, feitos para destacar seus produtos/serviços e posicionar sua empresa no Google.</p>
+      </div>
+
+      <div class="solution-row">
+        <div>
+          <h3>Catálogos e Pedidos Digitais</h3>
+          <p class="short">Apresente seus produtos de forma organizada e receba pedidos prontos direto no WhatsApp.</p>
+        </div>
+        <p class="detailed">Simplifique a escolha do cliente com um catálogo interativo, atualizado em tempo real e sem taxas por venda.</p>
+      </div>
+
+      <div class="solution-row">
+        <div>
+          <h3>Sistemas de Agendamento</h3>
+          <p class="short">Permita que seus clientes agendem horários 24h por dia sem sobrecarregar sua equipe.</p>
+        </div>
+        <p class="detailed">Automação simples para barbearias, salões, clínicas e prestadores de serviços organizarem suas agendas automaticamente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects" id="projetos">
+    <div class="wrap">
+      <div class="projects-head">
+        <h2 class="section-heading">Exemplos do que podemos construir</h2>
+        <p class="note">Ideias aplicadas às nossas três soluções — em breve, projetos reais de clientes por aqui.</p>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-thumb t1"></div>
+          <div class="project-body">
+            <span class="project-tag">Site institucional</span>
+            <h3>Padaria Trigo Dourado</h3>
+            <p>Cardápio online, botão direto pro WhatsApp e uma página feita pra aparecer no Google local.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb t2"></div>
+          <div class="project-body">
+            <span class="project-tag">Catálogo digital</span>
+            <h3>Studio Bela Hair</h3>
+            <p>Catálogo de serviços com preços e fotos, pedidos direto no WhatsApp sem taxa por venda.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb t3"></div>
+          <div class="project-body">
+            <span class="project-tag">Agendamento</span>
+            <h3>Clínica OdontoVida</h3>
+            <p>Agenda automática disponível 24h, sem sobrecarregar a recepção.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-footer" id="contato">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="contact-head">
+        <h2>Pronto para levar seu comércio para o próximo nível?</h2>
+        <p class="sub">Fale conosco hoje mesmo e descubra a melhor solução para o seu negócio.</p>
+        <a href="#" class="btn btn-primary whatsapp-cta">Iniciar conversa no WhatsApp</a>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Vamos conversar</h3>
+          <p>Conta pra gente um pouco do seu negócio e o que você precisa — respondemos direto no WhatsApp.</p>
+          <div class="detail">
+            <span>WhatsApp</span>
+            <span>(91) 99214-1318</span>
+          </div>
+          <div class="detail">
+            <span>Atendimento</span>
+            <span>Chapecó e região</span>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(49) 99999-9999" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com">
+          </div>
+          <div class="field">
+            <label for="mensagem">O que você precisa?</label>
+            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Ex: quero um site pra minha loja de roupas"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar e continuar no WhatsApp</button>
+          <p class="form-note">Ao enviar, abrimos o WhatsApp com sua mensagem pronta para envio.</p>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <a href="#" class="logo">Soluct<span>.</span></a>
+        <span>© 2026 Soluct. — desenvolvimento web em Chapecó, SC</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const PHONE = '5591992141318';
+  const BASE_MESSAGE = 'Olá, vi sua página e quero contratar um serviço!';
+
+  function waLink(text){
+    return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(text);
+  }
+
+  document.querySelectorAll('.whatsapp-cta, #headerWhatsapp').forEach(function(el){
+    el.setAttribute('href', waLink(BASE_MESSAGE));
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener');
+  });
+
+  // header background on scroll
+  const header = document.getElementById('siteHeader');
+  function onScroll(){
+    if (window.scrollY > 12) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // mobile menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', function(){
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // contact form -> whatsapp
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+
+    let text = BASE_MESSAGE + ' Meu nome é ' + nome + ', meu WhatsApp é ' + whatsapp + '.';
+    if (email) text += ' Meu e-mail: ' + email + '.';
+    if (mensagem) text += ' ' + mensagem;
+
+    window.open(waLink(text), '_blank', 'noopener');
+  });
+</script>
+
+</body>
+</html>
