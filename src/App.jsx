@@ -15,9 +15,9 @@ export default function App() {
       <Header whatsappLink={WHATSAPP_LINK} />
       <main className="pt-16">
         <Hero whatsappLink={WHATSAPP_LINK} />
-        <About />
         <Benefits />
         <Projects />
+        <About />
       </main>
       <FooterContact whatsappLink={WHATSAPP_LINK} />
     </div>
