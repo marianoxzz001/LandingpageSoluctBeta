@@ -171,3 +171,41 @@ section[id], footer[id] { scroll-margin-top: 80px; }
 #contato .social-panel { transform: translate3d(0, var(--card-drift, 0px), 0); }
 @media (max-width:760px) { #solucoes, #sobre { padding-top: 90px; padding-bottom: 90px; } }
 @media (prefers-reduced-motion:reduce) { .scroll-content, .hero-copy, .hero-art, #solucoes .effect-card:nth-child(even), #sobre .team-profile:nth-child(2), #contato .social-panel { transform: none; } }
+
+/* Keep desktop grids aligned while their section continues to move as one layer. */
+@media (min-width: 761px) {
+  #solucoes .effect-card:nth-child(even),
+  #sobre .team-profile:nth-child(2) { transform: none; }
+  #solucoes .effect-card.reveal,
+  #sobre .team-profile.reveal { translate: none; }
+}
+
+/* Mobile hero: artwork leads, with the headline overlapping its lower edge. */
+@media (max-width: 760px) {
+  .hero-layout { padding: 0 24px 44px; min-height: 0; }
+  .hero-art {
+    grid-row: 1;
+    grid-column: 1;
+    height: clamp(310px, 88vw, 420px);
+    margin: 0 -24px;
+    z-index: 0;
+  }
+  .hero-copy {
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: -135px;
+    isolation: isolate;
+  }
+  .hero-copy:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -25px -24px -44px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgb(var(--color-bg) / 0), rgb(var(--color-bg) / .90) 145px, rgb(var(--color-bg)) 260px);
+  }
+  .hero-copy h1 { text-shadow: 0 2px 24px rgb(var(--color-bg) / .6); }
+  .hero-copy .eyebrow { text-shadow: 0 1px 10px rgb(var(--color-bg)); }
+  .hero-art .art-story { display: none; }
+  .hero-art .particle-scene { mask-image: linear-gradient(to bottom, #000 65%, transparent 100%); }
+}
