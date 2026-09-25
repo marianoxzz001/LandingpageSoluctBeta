@@ -17,7 +17,7 @@ export default function About() {
             Conheça os Fundadores
           </h2>
           <p className="pt-1 text-sm leading-relaxed text-muted md:text-base">
-            Estudantes de Ciência da Computação em Chapecó. Sem intermediários: você conversa e alinha seu projeto diretamente com quem escreve o código.
+            Sem intermediários: você conversa e alinha seu projeto diretamente com quem escreve o código.
           </p>
         </div>
 
