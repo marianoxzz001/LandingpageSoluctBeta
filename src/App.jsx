@@ -7,8 +7,9 @@ import Benefits from './pages/Benefits';
 import FooterContact from './pages/FooterContact';
 
 export default function App() {
-  const WHATSAPP_NUMBER = '5549999999999';
-  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20sites.`;
+  const WHATSAPP_NUMBER = '5549988744527';
+  const WHATSAPP_MESSAGE = 'Olá! Quero conversar sobre uma necessidade do meu negócio.';
+  const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   return (
     <ThemeProvider>
