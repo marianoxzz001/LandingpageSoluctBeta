@@ -3,19 +3,22 @@ export default function About() {
     {
       id: 1,
       name: 'Bruno',
-      initial: 'B',
+      photo: '/team/bruno.webp',
+      photoHeight: 960,
       desc: 'Profissional de tecnologia e cofundador da Solv. Integra a equipe que transforma desafios de negócios em soluções digitais.',
     },
     {
       id: 2,
       name: 'Mariano',
-      initial: 'M',
+      photo: '/team/mariano.webp',
+      photoHeight: 960,
       desc: 'Profissional de tecnologia e cofundador da Solv. Participa da construção de soluções adequadas à realidade de cada negócio.',
     },
     {
       id: 3,
       name: 'Ryan',
-      initial: 'R',
+      photo: '/team/ryan.webp',
+      photoHeight: 1280,
       desc: 'Profissional de tecnologia e cofundador da Solv. Atua com a equipe no desenvolvimento e na entrega de soluções digitais.',
     },
   ];
@@ -38,7 +41,16 @@ export default function About() {
         <div className="grid gap-5 pt-4 md:grid-cols-3">
           {founders.map((founder) => (
             <article key={founder.id} className="team-profile">
-              <div className="team-profile-top"><span className="team-monogram" aria-hidden="true">{founder.initial}</span><span className="team-role">Cofundador</span></div>
+              <img
+                className="team-portrait"
+                src={founder.photo}
+                alt={`Retrato de ${founder.name}, cofundador da Solv`}
+                width="720"
+                height={founder.photoHeight}
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="team-profile-top"><span className="team-role">Cofundador</span></div>
               <h3>{founder.name}</h3>
               <p>{founder.desc}</p>
             </article>
