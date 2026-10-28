@@ -151,6 +151,7 @@ section[id], footer[id] { scroll-margin-top: 80px; }
 
 /* Third iteration: quieter content, a visible scroll-driven transition. */
 .team-profile { border-top: 1px solid rgb(var(--color-line)); padding: 28px 10px 10px; }
+.team-portrait { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 40%; border-radius: 12px; margin-bottom: 22px; background: rgb(var(--color-bg-soft)); }
 .team-profile-top { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
 .team-monogram { display: flex; align-items: baseline; font-size: 38px; font-weight: 500; letter-spacing: -.08em; color: rgb(var(--color-fg)); }
 .team-monogram > span { font: 11px ui-monospace, monospace; color: rgb(var(--color-muted)); margin-left: 5px; }

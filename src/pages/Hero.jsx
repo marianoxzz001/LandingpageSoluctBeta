@@ -9,9 +9,9 @@ export default function Hero({ whatsappLink }) {
       <div className="hero-grid" aria-hidden="true" />
       <div className="hero-layout">
         <div className="hero-copy">
-          <span className="eyebrow"><i /> SOFTWARE SOB MEDIDA. POSSIBILIDADES SEM LIMITE.</span>
+          <span className="eyebrow"><i /> SOLUÇÕES DIGITAIS PARA O SEU NEGÓCIO.</span>
           <h1>Seu próximo<br />grande passo<br /><span>é digital.</span></h1>
-          <p>Sua ideia ganha forma. Criamos sites e sistemas sob medida para conectar seu negócio às pessoas certas.</p>
+          <p>Começamos pelo seu desafio. Criamos sites, sistemas e automações ou adaptamos ferramentas que você já usa, conforme a realidade do seu negócio.</p>
           <div className="hero-actions">
             <a className="primary-cta" href={whatsappLink} target="_blank" rel="noopener noreferrer"><WhatsAppIcon size={23} variant="black" /> Vamos conversar no WhatsApp <ArrowUpRight size={19} /></a>
           </div>

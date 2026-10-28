@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="brand" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#22d3ee" />
+      <stop offset=".55" stop-color="#3b82f6" />
+      <stop offset="1" stop-color="#8b5cf6" />
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#3b82f6" stop-opacity=".18" />
+      <stop offset="1" stop-color="#05070d" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#05070d" />
+  <ellipse cx="1060" cy="315" rx="460" ry="450" fill="url(#glow)" />
+  <g fill="none" stroke="url(#brand)" stroke-opacity=".3">
+    <ellipse cx="1080" cy="315" rx="260" ry="460" transform="rotate(35 1080 315)" />
+    <ellipse cx="1080" cy="315" rx="220" ry="420" transform="rotate(35 1080 315)" />
+    <ellipse cx="1080" cy="315" rx="180" ry="380" transform="rotate(35 1080 315)" />
+  </g>
+  <g transform="translate(60 45)">
+    <path d="M14 50 C14 38 34 38 34 28 C34 18 14 18 14 12" fill="none" stroke="url(#brand)" stroke-width="9" stroke-linecap="round" />
+    <text x="60" y="45" fill="#f1f5f9" font-family="Arial, sans-serif" font-size="42" font-weight="700">s<tspan fill="#60a5fa">o</tspan>lv</text>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <text x="72" y="244" fill="#f1f5f9" font-size="68" font-weight="700" letter-spacing="-2">Soluções digitais</text>
+    <text x="72" y="326" fill="#a4eced" font-size="68" font-weight="700" letter-spacing="-2">para o seu negócio.</text>
+    <text x="76" y="397" fill="#94a3b8" font-size="25">Sites · Sistemas · Automações · Integrações</text>
+    <path d="M76 484 H1124" stroke="#1e293b" />
+    <text x="76" y="537" fill="#94a3b8" font-size="15" letter-spacing="1.4">CHAPECÓ, SC · ATENDIMENTO LOCAL E ONLINE</text>
+    <text x="1124" y="539" text-anchor="end" fill="#f1f5f9" font-size="23" font-weight="700">solv.website</text>
+  </g>
+</svg>
